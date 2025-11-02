@@ -1,28 +1,33 @@
-import { useState } from 'react'
+import React from 'react';
+import Hero from './components/Hero';
+import Skills from './components/Skills';
+import Projects from './components/Projects';
+import Contact from './components/Contact';
 
-function App() {
-  const [count, setCount] = useState(0)
-
+export default function App() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-50 to-blue-50 flex items-center justify-center">
-      <div className="bg-white p-8 rounded-lg shadow-lg">
-        <h1 className="text-3xl font-bold text-gray-800 mb-4">
-          Vibe Coding Platform
-        </h1>
-        <p className="text-gray-600 mb-6">
-          Your AI-powered development environment
-        </p>
-        <div className="text-center">
-          <button
-            onClick={() => setCount(count + 1)}
-            className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded"
-          >
-            Count is {count}
-          </button>
+    <div className="min-h-screen bg-slate-950 text-white">
+      <header className="fixed left-0 top-0 z-50 w-full border-b border-slate-800/70 bg-slate-950/70 backdrop-blur">
+        <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-3">
+          <a href="#home" className="text-sm font-semibold tracking-wide text-teal-300">Tanmay D Patil</a>
+          <nav className="hidden gap-6 text-sm text-slate-300 sm:flex">
+            <a className="hover:text-white" href="#skills">Skills</a>
+            <a className="hover:text-white" href="#projects">Projects</a>
+            <a className="hover:text-white" href="#contact">Contact</a>
+          </nav>
         </div>
-      </div>
-    </div>
-  )
-}
+      </header>
 
-export default App
+      <main className="pt-14">
+        <Hero />
+        <Skills />
+        <Projects />
+        <Contact />
+      </main>
+
+      <footer className="border-t border-slate-800/70 bg-slate-950 py-6 text-center text-xs text-slate-500">
+        © {new Date().getFullYear()} Tanmay D Patil • Built with React, Tailwind and Spline
+      </footer>
+    </div>
+  );
+}

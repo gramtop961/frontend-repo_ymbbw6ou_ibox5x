@@ -1,5 +1,6 @@
 import React from 'react';
 import { Code2, Server, Cloud, GitBranch, Boxes } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 const skills = [
   { name: 'React', icon: Code2, color: 'from-teal-500 to-cyan-400' },
@@ -12,6 +13,16 @@ const skills = [
   { name: 'AWS', icon: Cloud, color: 'from-yellow-500 to-orange-400' },
 ];
 
+const container = {
+  hidden: { opacity: 0 },
+  show: { opacity: 1, transition: { staggerChildren: 0.08 } },
+};
+
+const item = {
+  hidden: { opacity: 0, y: 16 },
+  show: { opacity: 1, y: 0, transition: { type: 'spring', stiffness: 120, damping: 14 } },
+};
+
 export default function Skills() {
   return (
     <section id="skills" className="relative w-full bg-slate-950 py-20 text-white">
@@ -23,10 +34,18 @@ export default function Skills() {
           </div>
         </div>
 
-        <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4">
+        <motion.div
+          variants={container}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, amount: 0.2 }}
+          className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4"
+        >
           {skills.map(({ name, icon: Icon, color }) => (
-            <div
+            <motion.div
+              variants={item}
               key={name}
+              whileHover={{ y: -4 }}
               className="group relative overflow-hidden rounded-xl border border-slate-800 bg-slate-900/60 p-5 transition hover:border-slate-700 hover:bg-slate-900/80"
             >
               <div className={`absolute -right-12 -top-12 h-28 w-28 rounded-full bg-gradient-to-br ${color} opacity-20 blur-2xl transition group-hover:opacity-30`} />
@@ -36,9 +55,9 @@ export default function Skills() {
                 </span>
                 <span className="text-sm font-medium text-slate-200">{name}</span>
               </div>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );

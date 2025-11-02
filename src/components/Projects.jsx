@@ -1,5 +1,6 @@
 import React from 'react';
 import { Rocket, ServerCog, Layers } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 const projects = [
   {
@@ -25,6 +26,16 @@ const projects = [
   },
 ];
 
+const container = {
+  hidden: { opacity: 0 },
+  show: { opacity: 1, transition: { staggerChildren: 0.12 } },
+};
+
+const item = {
+  hidden: { opacity: 0, y: 20 },
+  show: { opacity: 1, y: 0, transition: { type: 'spring', stiffness: 120, damping: 16 } },
+};
+
 export default function Projects() {
   return (
     <section id="projects" className="relative w-full bg-slate-950 py-20 text-white">
@@ -36,10 +47,18 @@ export default function Projects() {
           </div>
         </div>
 
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <motion.div
+          variants={container}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, amount: 0.2 }}
+          className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3"
+        >
           {projects.map(({ title, description, icon: Icon, tags }) => (
-            <article
+            <motion.article
               key={title}
+              variants={item}
+              whileHover={{ y: -6 }}
               className="group rounded-2xl border border-slate-800 bg-slate-900/60 p-6 transition hover:border-slate-700 hover:bg-slate-900/80"
             >
               <div className="mb-4 flex items-center gap-3">
@@ -59,9 +78,9 @@ export default function Projects() {
                   </span>
                 ))}
               </div>
-            </article>
+            </motion.article>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );
